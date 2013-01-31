@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="ui/jquery-1.9.0.js"></script>
+    <style type="text/css">
+    *{
+      margin: 0px;
+      padding: 0px;
+      list-style-type: none;
+    }
+    body{
+      background: #4A4321;
+    }
+    .warper{
+      width:760px;
+      margin: 0 auto;
+      height: 440px;
+      margin-top: 100px;
+      position: relative;
+    }
+    .gk{
+      position: absolute;
+      left: 50%;
+      margin-top: -220px;
+      top: 50%;
+      margin-left: -380px;
+      display: none;
+    }
+    img{
+      width: 100%;
+      height: 100%;
+      border: 0 none;
+    }
+    .warper a.pre,.warper a.next{
+      position: absolute;
+      display: block;
+      width: 50px;
+      height: 50px;
+      background: url("ui/buttons.png");
+    }
+    .warper a.pre{
+      left: 0px;
+      top: 100px;
+      background-position:  0px 50px;
+    }
+    .warper a.next{
+      right: 0px;
+      top: 100px;
+      background-position: 0px 0px;
+    }
+    ul{
+      position: absolute;
+      bottom: 0px;
+    }
+    li{
+      float: left;
+      margin-right: 14px;
+      padding: 10px;
+      background: yellow;
+      cursor: pointer;
+    }
+    .gk:first-child{
+    }
+    </style>
+  <script type="text/javascript">
+  $(function() {
+    var $warper = $(".warper"),
+      $img = $warper.find(".gk");
+      $lis = $warper.find("li");
+      $ul = $warper.find("ul");
+      var index = 0;
+      var old = 0;
+
+      $lis.on("click",$ul,function() {
+        index =$(this).index();
+        var t = new Date();
+        $img.eq(old)
+          .hide(500)
+          .end()
+          .eq(index)
+          .show(500);
+        old = index;
+        var tt = new Date();
+      });
+
+      $lis.filter(":first").trigger("click");
+
+      $("a.pre").on("click",function() {
+        index = ++index > $lis.length - 1 ? 0 : index;
+        $lis.eq(index).click();
+      });
+
+      $("a.next").on("click",function() {
+        index = --index < 0 ? $lis.length - 1 : index;
+        $lis.eq(index).click();
+      });
+  });
+  </script>
+  </head>
+  <body>
+    <div class="warper">
+      <div class="gk">
+          <img  src="ui/demo.slide1gk-is-346.png"/>
+      </div>
+      <div class="gk">
+          <img  src="ui/demo.slide6gk-is-346.png"/>
+      </div>
+      <div class="gk">
+          <img  src="ui/demo.slide8gk-is-346.png"/>
+      </div>
+      <a href="javascript:void(0);" class="pre"></a>
+      <a href="javascript:void(0);" class="next"></a>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+      </ul>
+    </div>
+  </body>
+</html>
